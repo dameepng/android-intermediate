@@ -61,7 +61,6 @@ class MainViewModelTest {
         )
         if (actualStory != null) {
             differ.submitData(actualStory)
-            advanceUntilIdle()
         }
 
         Assert.assertNotNull(differ.snapshot())
