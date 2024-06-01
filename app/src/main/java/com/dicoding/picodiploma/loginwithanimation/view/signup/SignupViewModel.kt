@@ -1,7 +1,7 @@
 package com.dicoding.picodiploma.loginwithanimation.view.signup
 
 import androidx.lifecycle.ViewModel
-import com.dicoding.picodiploma.loginwithanimation.Repository.StoryRepository
+import com.dicoding.picodiploma.loginwithanimation.repository.StoryRepository
 import com.dicoding.picodiploma.loginwithanimation.response.RegisterResponse
 import retrofit2.Call
 import retrofit2.Callback

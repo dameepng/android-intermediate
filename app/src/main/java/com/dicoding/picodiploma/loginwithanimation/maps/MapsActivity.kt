@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import com.dicoding.picodiploma.loginwithanimation.R
 import com.dicoding.picodiploma.loginwithanimation.databinding.ActivityMapsBinding
 import com.dicoding.picodiploma.loginwithanimation.view.ViewModelFactory
-import com.dicoding.picodiploma.loginwithanimation.maps.MapsViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -29,7 +28,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -38,7 +37,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Dapatkan token dari sesi pengguna
         mapsViewModel.getSession().observe(this, Observer { user ->
             val token = user.token
             if (token.isNotEmpty()) {
@@ -59,7 +57,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     if (stories != null) {
                         if (stories.isNotEmpty()) {
                             val firstStory = stories[0]
-                            val firstLocation = LatLng(firstStory?.lat ?: 0.0, firstStory?.lon ?: 0.0)
+                            val firstLocation =
+                                LatLng(firstStory?.lat ?: 0.0, firstStory?.lon ?: 0.0)
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(firstLocation, 10f))
                         }
                     }

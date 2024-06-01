@@ -8,7 +8,7 @@ import androidx.paging.PagingState
 import androidx.recyclerview.widget.ListUpdateCallback
 import com.dicoding.picodiploma.loginwithanimation.DataDummy
 import com.dicoding.picodiploma.loginwithanimation.MainDispatcherRule
-import com.dicoding.picodiploma.loginwithanimation.Repository.StoryRepository
+import com.dicoding.picodiploma.loginwithanimation.repository.StoryRepository
 import com.dicoding.picodiploma.loginwithanimation.adapter.StoryAdapter
 import com.dicoding.picodiploma.loginwithanimation.getOrAwaitValue
 import com.dicoding.picodiploma.loginwithanimation.response.ListStoryItem
@@ -16,10 +16,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -40,18 +38,13 @@ class MainViewModelTest {
     private lateinit var storyRepository: StoryRepository
     private lateinit var mainViewModel: MainViewModel
 
-    @Before
-    fun setUp() {
-        mainViewModel = MainViewModel(storyRepository)
-    }
-
     @Test
     fun `when Get Story Should Not Null and Return Data`() = runTest {
         val dummyStory = DataDummy.generateDummyGetStoriesResponse()
         val data: PagingData<ListStoryItem> = StoryPagingSource.snapshot(dummyStory)
         val expectedStory: Flow<PagingData<ListStoryItem>> = flowOf(data)
         Mockito.`when`(storyRepository.getStory()).thenReturn(expectedStory)
-
+        mainViewModel = MainViewModel(storyRepository)
         val actualStory = mainViewModel.story?.getOrAwaitValue()
 
         val differ = AsyncPagingDataDiffer(
@@ -73,7 +66,7 @@ class MainViewModelTest {
         val data: PagingData<ListStoryItem> = PagingData.from(emptyList())
         val expectedStory: Flow<PagingData<ListStoryItem>> = flowOf(data)
         Mockito.`when`(storyRepository.getStory()).thenReturn(expectedStory)
-
+        mainViewModel = MainViewModel(storyRepository)
         val actualStory = mainViewModel.story?.getOrAwaitValue()
         val differ = AsyncPagingDataDiffer(
             diffCallback = StoryAdapter.DIFF_CALLBACK,
@@ -94,7 +87,7 @@ class StoryPagingSource : PagingSource<Int, ListStoryItem>() {
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, ListStoryItem>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, ListStoryItem>): Int {
         return 0
     }
 

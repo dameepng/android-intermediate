@@ -15,7 +15,6 @@ object DataDummy {
                 null,
                 i.toString(),
                 null,
-
             )
             listStoryItem.add(story)
         }

@@ -3,7 +3,7 @@ package com.dicoding.picodiploma.loginwithanimation.view
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.picodiploma.loginwithanimation.Repository.StoryRepository
+import com.dicoding.picodiploma.loginwithanimation.repository.StoryRepository
 import com.dicoding.picodiploma.loginwithanimation.di.Injection
 import com.dicoding.picodiploma.loginwithanimation.maps.MapsViewModel
 import com.dicoding.picodiploma.loginwithanimation.view.login.LoginViewModel

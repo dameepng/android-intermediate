@@ -2,7 +2,7 @@ package com.dicoding.picodiploma.loginwithanimation.view.post
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dicoding.picodiploma.loginwithanimation.Repository.StoryRepository
+import com.dicoding.picodiploma.loginwithanimation.repository.StoryRepository
 import com.dicoding.picodiploma.loginwithanimation.response.UploadStoryResponse
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch

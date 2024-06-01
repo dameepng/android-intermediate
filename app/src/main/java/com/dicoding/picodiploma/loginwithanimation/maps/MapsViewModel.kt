@@ -3,7 +3,7 @@ package com.dicoding.picodiploma.loginwithanimation.maps
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
-import com.dicoding.picodiploma.loginwithanimation.Repository.StoryRepository
+import com.dicoding.picodiploma.loginwithanimation.repository.StoryRepository
 import kotlinx.coroutines.Dispatchers
 
 class MapsViewModel(private val repository: StoryRepository) : ViewModel() {

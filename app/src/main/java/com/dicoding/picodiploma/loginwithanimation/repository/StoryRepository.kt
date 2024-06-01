@@ -1,10 +1,8 @@
-package com.dicoding.picodiploma.loginwithanimation.Repository
+package com.dicoding.picodiploma.loginwithanimation.repository
 
-import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.liveData
 import com.dicoding.picodiploma.loginwithanimation.api.ApiService
 import com.dicoding.picodiploma.loginwithanimation.data.StoryPagingSource
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserPreference
@@ -15,6 +13,7 @@ import com.dicoding.picodiploma.loginwithanimation.response.RegisterResponse
 import com.dicoding.picodiploma.loginwithanimation.response.StoryResponse
 import com.dicoding.picodiploma.loginwithanimation.response.UploadStoryResponse
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
@@ -37,10 +36,10 @@ class StoryRepository private constructor(
 
     fun getStory(): Flow<PagingData<ListStoryItem>> = flow {
         val token = runBlocking { userPreference.getToken().first() }
-        emit(Pager(
+        emitAll(Pager(
             config = PagingConfig(pageSize = 5),
             pagingSourceFactory = { StoryPagingSource(apiService, token) }
-        ).flow.first())
+        ).flow)
     }
 
     suspend fun getStoriesWithLocation(token: String): StoryResponse {
